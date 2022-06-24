@@ -11,8 +11,11 @@ import CreatePage from './CreatePage';
 import UpdatePage from './UpdatePage';
 
 import './App.css';
+import { Redirect } from 'react-router-dom';
 
 export default function App() {
+  const [user, setUser] = useState();
+
   return (
     <Router>
       <div>
@@ -37,7 +40,12 @@ export default function App() {
             renders the first one that matches the current URL. */}
         <Switch>
           <Route exact path="/">
-            <AuthPage />
+            {
+              !user
+                ? <AuthPage setUser={setUser} />
+                : <Redirect to="/books" ></Redirect>
+              
+            }
           </Route>
           <Route exact path="/books">
             <ListPage />

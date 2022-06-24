@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { signUp } from './services/fetch-utils';
 
-export default function AuthPage() {
+export default function AuthPage({ setUser }) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
@@ -10,7 +10,7 @@ export default function AuthPage() {
 
     //use the email and password from the form to create a user in supabase
     const user = await signUp(email, password);
-    console.log(user);
+    setUser(user);
     
   }
   return (
